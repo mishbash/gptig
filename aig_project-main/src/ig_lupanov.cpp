@@ -132,7 +132,7 @@ void IGLupanov::build_conjuction_universal_set() {
 
         start_period = stop_period;
         stop_period = lupanov_scheme.getLastNodeNum();
-    }   
+    }
 
     border_before_cus = start_period + 1;
     border_between_cus = stop_period;
@@ -158,10 +158,19 @@ void IGLupanov::build_conjuction_universal_set() {
     border_of_cus = stop_period;
 
 
-    // lupanov_scheme.print(std::cout);
-    // std::cout << "First part:  " << border_before_cus << " " << border_between_cus << "\n";
-    // std::cout << "Second part: " << border_start_of_second_cus << " " << border_of_cus << "\n";
+    lupanov_scheme.print(std::cout);
+    std::cout << "First part:  " << border_before_cus << " " << border_between_cus << "\n";
+    std::cout << "Second part: " << border_start_of_second_cus << " " << border_of_cus << "\n";
 }
+
+
+/*
+
+    f(x1, x2, x3, x4) = f(0, 0, x3, x4) V f(0, 1, x3, x4) V f(1, 0, x3, x4) V f(1, 1, x3, x4)
+
+    -> f(i, j, x3, x4) synthesis i = 0..1, j = 0..1 
+
+*/
 
 
 void IGLupanov::synthesis() {
@@ -169,6 +178,16 @@ void IGLupanov::synthesis() {
 
     Function Conjunction({0,0,0,1});
     // Function Disjunction({0,1,1,1});
+
+    // for (auto k_bitmask: std:views::iota(0u, 1u << k_first_variables)) {
+    //     std::vector<bool> binary_set;
+    //     for (auto n_k_bitmask: std::views::iota(0u, 1u << n_k_last_variables)) {
+            
+    //     }
+
+
+    // }
+
 
     unsigned last_node_to_output = -1;
     for (auto n_k_bitmask : std::views::iota(0u, 1u << n_k_last_variables)) { 
@@ -221,5 +240,4 @@ void IGLupanov::synthesis() {
     // function.print(std::cout);
     // auto res = lupanov_scheme.getResult();
     // res.print(std::cout);
-
 }
